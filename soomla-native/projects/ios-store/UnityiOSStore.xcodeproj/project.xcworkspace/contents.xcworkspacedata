@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:SoomlaIOSStore.xcodeproj">
+      location = "self:UnityiOSStore.xcodeproj">
    </FileRef>
 </Workspace>

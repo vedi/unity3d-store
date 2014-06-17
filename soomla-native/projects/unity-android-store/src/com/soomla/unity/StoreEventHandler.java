@@ -29,15 +29,15 @@ import com.soomla.store.events.UnexpectedStoreErrorEvent;
 import com.squareup.otto.Subscribe;
 import com.unity3d.player.UnityPlayer;
 
-public class EventHandler {
-    private static EventHandler mLocalEventHandler;
+public class StoreEventHandler {
+    private static StoreEventHandler mLocalEventHandler;
 
     public static void initialize() {
-        mLocalEventHandler = new EventHandler();
+        mLocalEventHandler = new StoreEventHandler();
 
     }
 
-    public EventHandler() {
+    public StoreEventHandler() {
         BusProvider.getInstance().register(this);
     }
 

@@ -1,4 +1,4 @@
-﻿/// Copyright (C) 2012-2014 Soomla Inc.
+/// Copyright (C) 2012-2014 Soomla Inc.
 ///
 /// Licensed under the Apache License, Version 2.0 (the "License");
 /// you may not use this file except in compliance with the License.
@@ -13,21 +13,28 @@
 /// limitations under the License.
 
 using UnityEngine;
-using System;
-using System.Runtime.InteropServices;
+using System.IO;
+#if UNITY_EDITOR
+using UnityEditor;
 
-namespace Soomla {
-
-	public static class SoomlaAndroid {
-#if UNITY_ANDROID && !UNITY_EDITOR
-		public static bool initialize() {
-			AndroidJNI.PushLocalFrame(100);
-			using(AndroidJavaClass jniSoomlaClass = new AndroidJavaClass("com.soomla.Soomla")) {
-				jniSoomlaClass.CallStatic("initialize", SoomSettings.SoomlaSecret);
-			}
-			AndroidJNI.PopLocalFrame(IntPtr.Zero);
-			return true;
-		}
+[InitializeOnLoad]
 #endif
+
+/// <summary>
+/// This class holds the store's configurations. 
+/// </summary>
+public class CoreSoomlaPanel
+{
+
+
+	static CoreSoomlaPanel()
+    {
+		SoomlaEditorScript.setPanel(instance);
+    }
+
+	static CoreSoomlaPanel instance = new CoreSoomlaPanel();
+
+	public void draw() {
+		EditorGUILayout.HelpBox("HAHAHAHAHAHAH", MessageType.None);
 	}
 }

@@ -362,21 +362,6 @@ public class StoreEventHandler {
         }
     }
 
-    @Subscribe
-    public void onVerificationStarted(VerificationStartedEvent verificationStartedEvent) {
-        if (verificationStartedEvent.Sender == this) {
-            return;
-        }
-        try {
-            JSONObject eventJSON = new JSONObject();
-            eventJSON.put("itemId", verificationStartedEvent.getPurchasableVirtualItem().getItemId());
-
-            UnityPlayer.UnitySendMessage("StoreEvents", "onVerificationStarted", eventJSON.toString());
-        } catch (JSONException e) {
-            SoomlaUtils.LogError(TAG, "This is BAD! couldn't create JSON for onVerificationStarted event.");
-        }
-    }
-
 
     @Subscribe
     public void onVerificationStarted(VerificationStartedEvent verificationStartedEvent) {

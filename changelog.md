@@ -1,3 +1,18 @@
+### v1.9.1 [view commit logs](https://github.com/soomla/unity3d-store/compare/v1.9.0...v1.9.1)
+
+* Changes
+  * Minor improvements in Editor script
+
+### v1.9.0 [view commit logs](https://github.com/soomla/unity3d-store/compare/v1.8.6...v1.9.0)
+
+* Features
+  * Added checking for latest version in Soomla Settings panel
+  * Added a new way of event handling without prefabs
+  * Add Market Purchase Deferred handling
+
+* Changes
+  * Moved all SOOMLA plugins into 'Soomla' folders
+
 ### v1.8.6 [view commit logs](https://github.com/soomla/unity3d-store/compare/v1.8.5...v1.8.6)
 
 * Fixes

@@ -34,10 +34,10 @@ unity3d-store is the Unity3d flavor of SOOMLA's Store Module.
 
 ####Pre baked unitypackages:
 
-> If you're upgrading to v1.7.x make sure you take soomla-unity3d-core again.
+> If you're upgrading from a version below v1.7.x make sure you take soomla-unity3d-core again.
 
 [unity3d-store v1.9.1](http://library.soom.la/fetch/unity3d-store/1.9.1?cf=github)
- 
+
 #### From sources:
  - Clone this repository recursively: `git clone --recursive https://github.com/soomla/unity3d-store.git`
  - Run `./build_all` from project directory
@@ -74,9 +74,9 @@ $ git clone --recursive git@github.com:soomla/unity3d-store.git
 
 2. ~~Drag the "StoreEvents" and "CoreEvents" Prefabs from `Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel.~~
 
-    <div class="info-box">This step is no longer required starting from Store v1.9.0</div>
+    >This step is no longer required starting from Store v1.9.0
 
-  ![alt text](http://know.soom.la/img/tutorial_img/unity_getting_started/prefabs.png "Prefabs")
+  ![alt text](http://know.soom.la/img/tutorial_img/unity_getting_started/prefabs.png?v=2 "Prefabs")
 
 3. On the menu bar click **Window > Soomla > Edit Settings** and change the values for "Soomla Secret" and "Public Key":
 

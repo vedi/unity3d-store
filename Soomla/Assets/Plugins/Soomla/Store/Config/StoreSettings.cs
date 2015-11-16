@@ -50,13 +50,6 @@ namespace Soomla.Store
 			SoomlaEditorScript.addFileList("Store", "Assets/Soomla/store_file_list", additionalDependFiles.ToArray());
 		}
 
-		bool showAndroidSettings = (EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android);
-		#if UNITY_4_5 || UNITY_4_6
-		bool showIOSSettings = (EditorUserBuildSettings.activeBuildTarget == BuildTarget.iPhone);
-		#else
-		bool showIOSSettings = (EditorUserBuildSettings.activeBuildTarget == BuildTarget.iOS);
-		#endif
-		bool showWP8Settings = (EditorUserBuildSettings.activeBuildTarget == BuildTarget.WP8Player);
 
 		GUIContent noneBPLabel = new GUIContent("You have your own Billing Service");
 		GUIContent playLabel = new GUIContent("Google Play");
@@ -85,11 +78,7 @@ namespace Soomla.Store
 		}
 
 		public void OnModuleGUI() {
-			AndroidGUI();
-			EditorGUILayout.Space();
-			IOSGUI();
-            		EditorGUILayout.Space();
-            		WP8GUI();
+
 		}
 
 		public void OnInfoGUI() {
@@ -102,141 +91,135 @@ namespace Soomla.Store
 
 		}
 
-		private void IOSGUI()
+		public void OnIOSGUI()
 		{
-			showIOSSettings = EditorGUILayout.Foldout(showIOSSettings, "iOS Build Settings");
-			if (showIOSSettings)
-			{
-				IosSSV = EditorGUILayout.Toggle(iosSsvLabel, IosSSV);
-
-                if (IosSSV) {
-                    EditorGUILayout.BeginHorizontal();
-                    EditorGUILayout.Space();
-                    EditorGUILayout.LabelField(SoomlaEditorScript.EmptyContent, SoomlaEditorScript.SpaceWidth, SoomlaEditorScript.FieldHeight);
-                    IosVerifyOnServerFailure = EditorGUILayout.Toggle(iosVerifyOnServerFailureLabel, IosVerifyOnServerFailure);
-                    EditorGUILayout.EndHorizontal();
-                }
+			EditorGUILayout.HelpBox("Store Settings", MessageType.None);
+			
+			IosSSV = EditorGUILayout.Toggle(iosSsvLabel, IosSSV);
+			if (IosSSV) {
+				EditorGUILayout.BeginHorizontal();
+				EditorGUILayout.Space();
+				EditorGUILayout.LabelField(SoomlaEditorScript.EmptyContent, SoomlaEditorScript.SpaceWidth, SoomlaEditorScript.FieldHeight);
+				IosVerifyOnServerFailure = EditorGUILayout.Toggle(iosVerifyOnServerFailureLabel, IosVerifyOnServerFailure);
+				EditorGUILayout.EndHorizontal();
 			}
 			EditorGUILayout.Space();
 		}
 
-		private void AndroidGUI()
+		public void OnAndroidGUI()
 		{
-			showAndroidSettings = EditorGUILayout.Foldout(showAndroidSettings, "Android Settings");
-			if (showAndroidSettings)
-			{
+			EditorGUILayout.HelpBox("Store Settings", MessageType.None);
+
+			EditorGUILayout.BeginHorizontal();
+			SoomlaEditorScript.SelectableLabelField(packageNameLabel, PlayerSettings.bundleIdentifier);
+			EditorGUILayout.EndHorizontal();
+
+			EditorGUILayout.Space();
+			EditorGUILayout.HelpBox("Billing Service Selection", MessageType.None);
+
+			if (!GPlayBP && !AmazonBP && !NoneBP) {
+					GPlayBP = true;
+			}
+
+			NoneBP = EditorGUILayout.ToggleLeft(noneBPLabel, NoneBP);
+
+			bool update;
+			bpUpdate.TryGetValue("none", out update);
+			if (NoneBP && !update) {
+				setCurrentBPUpdate("none");
+
+				AmazonBP = false;
+				GPlayBP = false;
+				SoomlaManifestTools.GenerateManifest();
+				handlePlayBPJars(true);
+				handleAmazonBPJars(true);
+				}
+
+
+			GPlayBP = EditorGUILayout.ToggleLeft(playLabel, GPlayBP);
+
+			if (GPlayBP) {
 				EditorGUILayout.BeginHorizontal();
-				SoomlaEditorScript.SelectableLabelField(packageNameLabel, PlayerSettings.bundleIdentifier);
+				EditorGUILayout.Space();
+				EditorGUILayout.LabelField(publicKeyLabel, SoomlaEditorScript.FieldWidth, SoomlaEditorScript.FieldHeight);
+				AndroidPublicKey = EditorGUILayout.TextField(AndroidPublicKey, SoomlaEditorScript.FieldHeight);
 				EditorGUILayout.EndHorizontal();
 
 				EditorGUILayout.Space();
-				EditorGUILayout.HelpBox("Billing Service Selection", MessageType.None);
 
-				if (!GPlayBP && !AmazonBP && !NoneBP) {
-					GPlayBP = true;
-				}
+				EditorGUILayout.BeginHorizontal();
+				EditorGUILayout.LabelField(SoomlaEditorScript.EmptyContent, SoomlaEditorScript.SpaceWidth, SoomlaEditorScript.FieldHeight);
+				AndroidTestPurchases = EditorGUILayout.Toggle(testPurchasesLabel, AndroidTestPurchases);
+				EditorGUILayout.EndHorizontal();
 
-				NoneBP = EditorGUILayout.ToggleLeft(noneBPLabel, NoneBP);
+				EditorGUILayout.BeginHorizontal();
+				EditorGUILayout.LabelField(SoomlaEditorScript.EmptyContent, SoomlaEditorScript.SpaceWidth, SoomlaEditorScript.FieldHeight);
+				PlaySsvValidation = EditorGUILayout.Toggle(playSsvLabel, PlaySsvValidation);
+				EditorGUILayout.EndHorizontal();
 
-				bool update;
-				bpUpdate.TryGetValue("none", out update);
-				if (NoneBP && !update) {
-					setCurrentBPUpdate("none");
-
-					AmazonBP = false;
-					GPlayBP = false;
-					SoomlaManifestTools.GenerateManifest();
-					handlePlayBPJars(true);
-					handleAmazonBPJars(true);
-				}
-
-
-				GPlayBP = EditorGUILayout.ToggleLeft(playLabel, GPlayBP);
-
-				if (GPlayBP) {
+				if (PlaySsvValidation) {
 					EditorGUILayout.BeginHorizontal();
 					EditorGUILayout.Space();
-					EditorGUILayout.LabelField(publicKeyLabel, SoomlaEditorScript.FieldWidth, SoomlaEditorScript.FieldHeight);
-					AndroidPublicKey = EditorGUILayout.TextField(AndroidPublicKey, SoomlaEditorScript.FieldHeight);
+					EditorGUILayout.LabelField(playClientIdLabel, SoomlaEditorScript.FieldWidth, SoomlaEditorScript.FieldHeight);
+					PlayClientId = EditorGUILayout.TextField(PlayClientId, SoomlaEditorScript.FieldHeight);
 					EditorGUILayout.EndHorizontal();
 
+					EditorGUILayout.BeginHorizontal();
 					EditorGUILayout.Space();
-
-					EditorGUILayout.BeginHorizontal();
-					EditorGUILayout.LabelField(SoomlaEditorScript.EmptyContent, SoomlaEditorScript.SpaceWidth, SoomlaEditorScript.FieldHeight);
-					AndroidTestPurchases = EditorGUILayout.Toggle(testPurchasesLabel, AndroidTestPurchases);
+					EditorGUILayout.LabelField(playClientSecretLabel, SoomlaEditorScript.FieldWidth, SoomlaEditorScript.FieldHeight);
+					PlayClientSecret = EditorGUILayout.TextField(PlayClientSecret, SoomlaEditorScript.FieldHeight);
 					EditorGUILayout.EndHorizontal();
 
 					EditorGUILayout.BeginHorizontal();
-					EditorGUILayout.LabelField(SoomlaEditorScript.EmptyContent, SoomlaEditorScript.SpaceWidth, SoomlaEditorScript.FieldHeight);
-					PlaySsvValidation = EditorGUILayout.Toggle(playSsvLabel, PlaySsvValidation);
+					EditorGUILayout.Space();
+					EditorGUILayout.LabelField(playRefreshTokenLabel, SoomlaEditorScript.FieldWidth, SoomlaEditorScript.FieldHeight);
+					PlayRefreshToken = EditorGUILayout.TextField(PlayRefreshToken, SoomlaEditorScript.FieldHeight);
 					EditorGUILayout.EndHorizontal();
 
-					if (PlaySsvValidation) {
-						EditorGUILayout.BeginHorizontal();
-						EditorGUILayout.Space();
-						EditorGUILayout.LabelField(playClientIdLabel, SoomlaEditorScript.FieldWidth, SoomlaEditorScript.FieldHeight);
-						PlayClientId = EditorGUILayout.TextField(PlayClientId, SoomlaEditorScript.FieldHeight);
-						EditorGUILayout.EndHorizontal();
-
-						EditorGUILayout.BeginHorizontal();
-						EditorGUILayout.Space();
-						EditorGUILayout.LabelField(playClientSecretLabel, SoomlaEditorScript.FieldWidth, SoomlaEditorScript.FieldHeight);
-						PlayClientSecret = EditorGUILayout.TextField(PlayClientSecret, SoomlaEditorScript.FieldHeight);
-						EditorGUILayout.EndHorizontal();
-
-						EditorGUILayout.BeginHorizontal();
-						EditorGUILayout.Space();
-						EditorGUILayout.LabelField(playRefreshTokenLabel, SoomlaEditorScript.FieldWidth, SoomlaEditorScript.FieldHeight);
-						PlayRefreshToken = EditorGUILayout.TextField(PlayRefreshToken, SoomlaEditorScript.FieldHeight);
-						EditorGUILayout.EndHorizontal();
-
-						EditorGUILayout.BeginHorizontal();
-						EditorGUILayout.Space();
-						EditorGUILayout.LabelField(SoomlaEditorScript.EmptyContent, SoomlaEditorScript.SpaceWidth, SoomlaEditorScript.FieldHeight);
-						PlayVerifyOnServerFailure = EditorGUILayout.Toggle(playVerifyOnServerFailureLabel, PlayVerifyOnServerFailure);
-						EditorGUILayout.EndHorizontal();
-					}
+					EditorGUILayout.BeginHorizontal();
+					EditorGUILayout.Space();
+					EditorGUILayout.LabelField(SoomlaEditorScript.EmptyContent, SoomlaEditorScript.SpaceWidth, SoomlaEditorScript.FieldHeight);
+					PlayVerifyOnServerFailure = EditorGUILayout.Toggle(playVerifyOnServerFailureLabel, PlayVerifyOnServerFailure);
+					EditorGUILayout.EndHorizontal();
 				}
+			}
 
-				bpUpdate.TryGetValue("play", out update);
-				if (GPlayBP && !update) {
-					setCurrentBPUpdate("play");
+			bpUpdate.TryGetValue("play", out update);
+			if (GPlayBP && !update) {
+				setCurrentBPUpdate("play");
 
-					AmazonBP = false;
-					NoneBP = false;
-					SoomlaManifestTools.GenerateManifest();
-					handlePlayBPJars(false);
-					handleAmazonBPJars(true);
-				}
+				AmazonBP = false;
+				NoneBP = false;
+				SoomlaManifestTools.GenerateManifest();
+				handlePlayBPJars(false);
+				handleAmazonBPJars(true);
+			}
 
 
-				AmazonBP = EditorGUILayout.ToggleLeft(amazonLabel, AmazonBP);
-				bpUpdate.TryGetValue("amazon", out update);
-				if (AmazonBP && !update) {
-					setCurrentBPUpdate("amazon");
+			AmazonBP = EditorGUILayout.ToggleLeft(amazonLabel, AmazonBP);
+			bpUpdate.TryGetValue("amazon", out update);
+			if (AmazonBP && !update) {
+				setCurrentBPUpdate("amazon");
 
-					GPlayBP = false;
-					NoneBP = false;
-					SoomlaManifestTools.GenerateManifest();
-					handlePlayBPJars(true);
-					handleAmazonBPJars(false);
-				}
+				GPlayBP = false;
+				NoneBP = false;
+				SoomlaManifestTools.GenerateManifest();
+				handlePlayBPJars(true);
+				handleAmazonBPJars(false);
 			}
 			EditorGUILayout.Space();
 		}
 
 
-        private void WP8GUI()
+        public void OnWP8GUI()
         {
-            showWP8Settings = EditorGUILayout.Foldout(showWP8Settings, "WP8 Settings");
-            if (showWP8Settings)
-            {
-                WP8SimulatorBuild = EditorGUILayout.ToggleLeft(wp8SimulatorModeLabel, WP8SimulatorBuild);
-                EditorGUILayout.Space();
-                WP8TestMode = EditorGUILayout.ToggleLeft(wp8TestModeLabel, WP8TestMode);
-            }
+			EditorGUILayout.HelpBox("Store Settings", MessageType.None);
 
+			WP8SimulatorBuild = EditorGUILayout.ToggleLeft(wp8SimulatorModeLabel, WP8SimulatorBuild);
+			EditorGUILayout.Space();
+			WP8TestMode = EditorGUILayout.ToggleLeft(wp8TestModeLabel, WP8TestMode);
+         
+			EditorGUILayout.Space();
         }
 
 

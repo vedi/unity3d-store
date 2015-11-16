@@ -13,3 +13,6 @@
 [submodule "submodules/wp-store"]
 	path = submodules/wp-store
 	url = git@github.com:soomla/wp-store.git
+[submodule "submodules/android-store-google-play"]
+	path = submodules/android-store-google-play
+	url = git@github.com:soomla/android-store-google-play.git

@@ -16,3 +16,6 @@
 [submodule "submodules/android-store-google-play"]
 	path = submodules/android-store-google-play
 	url = git@github.com:soomla/android-store-google-play.git
+[submodule "submodules/android-store-amazon"]
+	path = submodules/android-store-amazon
+	url = git@github.com:soomla/android-store-amazon.git

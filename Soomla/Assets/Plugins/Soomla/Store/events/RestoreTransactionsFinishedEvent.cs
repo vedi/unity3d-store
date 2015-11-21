@@ -1,27 +1,26 @@
-using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Soomla
+namespace Soomla.Store
 {
-    public class RestoreTransactionsFinishedEvent : SoomlaEvent
-    {
-        private boolean mSuccess;
+	public class RestoreTransactionsFinishedEvent : SoomlaEvent
+	{
+		private bool mSuccess;
 
-        public RestoreTransactionsFinishedEvent(boolean success)
-        {
-            this(success, null);
-        }
+		public RestoreTransactionsFinishedEvent (bool success):this(success, null)
+		{
+            
+		}
 
-        public RestoreTransactionsFinishedEvent(boolean success, Object sender)
-        {
-            super(sender);
-            mSuccess = success;
-        }
+		public RestoreTransactionsFinishedEvent (bool success, Object sender):base(sender)
+		{
+			mSuccess = success;
+		}
 
-        public boolean isSuccess()
-        {
-            return mSuccess;
-        }
-    }
+		public bool isSuccess ()
+		{
+			return mSuccess;
+		}
+	}
 }

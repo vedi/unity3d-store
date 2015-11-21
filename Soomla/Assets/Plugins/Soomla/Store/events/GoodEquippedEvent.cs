@@ -1,27 +1,27 @@
-using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Soomla
+namespace Soomla.Store
 {
-    public class GoodEquippedEvent : SoomlaEvent
-    {
-        private String mItemId;
+	public class GoodEquippedEvent : SoomlaEvent
+	{
+		private EquippableVG mItem;
 
-        public GoodEquippedEvent(String itemId) : base(null)
-        {
-            mItemId = itemId;
-        }
+		public GoodEquippedEvent (EquippableVG item) : this(item, null)
+		{
+			mItem = item;
+		}
 
-        public GoodEquippedEvent(String itemId, Object sender) : base(sender)
-        {
-            mItemId = itemId;
-        }
+		public GoodEquippedEvent (EquippableVG item, Object sender) : base(sender)
+		{
+			mItem = item;
+		}
 
-        public String getGoodItemId()
-        {
-            return mItemId;
-        }
+		public EquippableVG getGoodItem ()
+		{
+			return mItem;
+		}
 
-    }
+	}
 }

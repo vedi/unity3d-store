@@ -1,46 +1,42 @@
-using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Soomla
+namespace Soomla.Store
 {
-    public class GoodBalanceChangedEvent : SoomlaEvent
-    {
+	public class GoodBalanceChangedEvent : SoomlaEvent
+	{
 
-        private String mItemId;
+		private VirtualGood mItem;
+		private int mBalance;
+		private int mAmountAdded;
 
-        private int mBalance;
+		public GoodBalanceChangedEvent (VirtualGood item, int balance, int amountAdded) : this(item, balance, amountAdded, null)
+		{
 
-        private int mAmountAdded;
+		}
 
-        public GoodBalanceChangedEvent(String itemId, int balance, int amountAdded) : base(null)
-        {
-            mItemId = itemId;
-            mBalance = balance;
-            mAmountAdded = amountAdded;
-        }
+		public GoodBalanceChangedEvent (VirtualGood item, int balance, int amountAdded, Object sender) : base(sender)
+		{
+			mItem = item;
+			mBalance = balance;
+			mAmountAdded = amountAdded;
+		}
 
-        public GoodBalanceChangedEvent(String itemId, int balance, int amountAdded, Object sender) : base(null)
-        {
-            mItemId = itemId;
-            mBalance = balance;
-            mAmountAdded = amountAdded;
-        }
+		public VirtualGood getGoodItemId ()
+		{
+			return mItem;
+		}
 
-        public String getGoodItemId()
-        {
-            return mItemId;
-        }
+		public int getBalance ()
+		{
+			return mBalance;
+		}
 
-        public int getBalance()
-        {
-            return mBalance;
-        }
+		public int getAmountAdded ()
+		{
+			return mAmountAdded;
+		}
 
-        public int getAmountAdded()
-        {
-            return mAmountAdded;
-        }
-
-    }
+	}
 }

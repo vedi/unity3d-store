@@ -1,34 +1,33 @@
-using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Soomla
+namespace Soomla.Store
 {
-    public class GoodUpgradeEvent : SoomlaEvent
-    {
-        private String mItemId;
+	public class GoodUpgradeEvent : SoomlaEvent
+	{
+		private VirtualGood mItem ;
+		private UpgradeVG mCurrentUpgradeItem ;
 
-        private String mCurrentUpgradeItemId;
+		public GoodUpgradeEvent (VirtualGood item , UpgradeVG upgradeVGItem ) : this(item , upgradeVGItem , null)
+		{
 
-        public GoodUpgradeEvent(String itemId, String upgradeVGItemId) : this(itemId, upgradeVGItemId, null)
-        {
+		}
 
-        }
+		public GoodUpgradeEvent (VirtualGood item , UpgradeVG upgradeVGItem , Object sender) : base(sender)
+		{
+			mItem  = item ;
+			mCurrentUpgradeItem  = upgradeVGItem ;
+		}
 
-        public GoodUpgradeEvent(String itemId, String upgradeVGItemId, Object sender) : base(sender)
-        {
-            mItemId = itemId;
-            mCurrentUpgradeItemId = upgradeVGItemId;
-        }
+		public VirtualGood getGoodItem  ()
+		{
+			return mItem ;
+		}
 
-        public String getGoodItemId()
-        {
-            return mItemId;
-        }
-
-        public String getCurrentUpgrade()
-        {
-            return mCurrentUpgradeItemId;
-        }
-    }
+		public UpgradeVG getCurrentUpgrade ()
+		{
+			return mCurrentUpgradeItem ;
+		}
+	}
 }

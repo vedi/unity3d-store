@@ -1,34 +1,25 @@
-using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Soomla
+namespace Soomla.Store
 {
-    public class MarketRefundEvent : SoomlaEvent
-    {
+	public class MarketRefundEvent : SoomlaEvent
+	{
+		private PurchasableVirtualItem mPurchasableVirtualItem;
 
-        private PurchasableVirtualItem mPurchasableVirtualItem;
+		public MarketRefundEvent (PurchasableVirtualItem purchasableVirtualItem): this(purchasableVirtualItem, null)
+		{
+		}
 
-        private String mPayload;
+		public MarketRefundEvent (PurchasableVirtualItem purchasableVirtualItem, Object sender):base(sender)
+		{
+			mPurchasableVirtualItem = purchasableVirtualItem;
+		}
 
-        public MarketRefundEvent(PurchasableVirtualItem purchasableVirtualItem, String payload): this(purchasableVirtualItem, payload, null)
-        {
-        }
-
-        public MarketRefundEvent(PurchasableVirtualItem purchasableVirtualItem, String payload, Object sender):base(sender)
-        {
-            mPurchasableVirtualItem = purchasableVirtualItem;
-            mPayload = payload;
-        }
-
-        public PurchasableVirtualItem getPurchasableVirtualItem()
-        {
-            return mPurchasableVirtualItem;
-        }
-
-        public String getPayload()
-        {
-            return mPayload;
-        }
-    }
+		public PurchasableVirtualItem getPurchasableVirtualItem ()
+		{
+			return mPurchasableVirtualItem;
+		}
+	}
 }

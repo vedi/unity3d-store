@@ -1,19 +1,20 @@
-using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Soomla
+namespace Soomla.Store
 {
-    public class IabServiceStoppedEvent : SoomlaEvent
-    {
+	public class IabServiceStoppedEvent : SoomlaEvent
+	{
 
-        public IabServiceStoppedEvent() : this(null)
-        {
+		public IabServiceStoppedEvent () : this(null)
+		{
 
-        }
+		}
 
-        public IabServiceStoppedEvent(Object sender) : base(sender)
-        {
-        }
-    }
+		public IabServiceStoppedEvent (Object sender) : base(sender)
+		{
+
+		}
+	}
 }

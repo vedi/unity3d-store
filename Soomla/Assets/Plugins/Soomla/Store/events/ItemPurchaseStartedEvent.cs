@@ -1,27 +1,27 @@
-using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Soomla
+namespace Soomla.Store
 {
-    public class ItemPurchaseStartedEvent : SoomlaEvent
-    {
-        private String mItemId;
+	public class ItemPurchaseStartedEvent : SoomlaEvent
+	{
+		private PurchasableVirtualItem mItem ;
 
-        public ItemPurchaseStartedEvent(String itemId) : this(itemId, null)
-        {
+		public ItemPurchaseStartedEvent (PurchasableVirtualItem item ) : this(item , null)
+		{
 
-        }
+		}
 
-        public ItemPurchaseStartedEvent(String itemId, Object sender) : base(sender)
-        {
-            mItemId = itemId;
-        }
+		public ItemPurchaseStartedEvent (PurchasableVirtualItem item , Object sender) : base(sender)
+		{
+			mItem  = item ;
+		}
 
-        public String getItemId()
-        {
-            return mItemId;
-        }
+		public PurchasableVirtualItem getItem  ()
+		{
+			return mItem ;
+		}
 
-    }
+	}
 }

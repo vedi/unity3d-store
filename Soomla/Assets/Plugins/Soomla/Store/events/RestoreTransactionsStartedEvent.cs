@@ -1,20 +1,20 @@
-using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Soomla
+namespace Soomla.Store
 {
-    public class RestoreTransactionsStartedEvent : SoomlaEvent
-    {
+	public class RestoreTransactionsStartedEvent : SoomlaEvent
+	{
 
-        public RestoreTransactionsStartedEvent() : this(null)
-        {
+		public RestoreTransactionsStartedEvent () : this(null)
+		{
 
-        }
+		}
 
-        public RestoreTransactionsStartedEvent(Object sender) : base(sender)
-        {
+		public RestoreTransactionsStartedEvent (Object sender) : base(sender)
+		{
 
-        }
-    }
+		}
+	}
 }

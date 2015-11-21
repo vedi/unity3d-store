@@ -1,18 +1,19 @@
-using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Soomla
+namespace Soomla.Store
 {
-    public class MarketItemsRefreshStartedEvent : SoomlaEvent
-    {
-        public MarketItemsRefreshStartedEvent() : this(null)
-        {
-        }
+	public class MarketItemsRefreshStartedEvent : SoomlaEvent
+	{
+		public MarketItemsRefreshStartedEvent () : this(null)
+		{
 
-        public MarketItemsRefreshStartedEvent(Object sender) : base(sender)
-        {
+		}
 
-        }
-    }
+		public MarketItemsRefreshStartedEvent (Object sender) : base(sender)
+		{
+
+		}
+	}
 }

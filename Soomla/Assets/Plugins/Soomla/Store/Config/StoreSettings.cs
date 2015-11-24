@@ -35,6 +35,8 @@ namespace Soomla.Store
 
 #if UNITY_EDITOR
 
+		private static string StoreModulePrefix = "Store";
+
 		static StoreSettings instance = new StoreSettings();
 
 		static string currentModuleVersion = "1.9.1";
@@ -64,8 +66,8 @@ namespace Soomla.Store
 		GUIContent publicKeyLabel = new GUIContent("API Key [?]:", "The API key from Google Play dev console (just in case you're using Google Play as billing provider).");
 		GUIContent testPurchasesLabel = new GUIContent("Test Purchases [?]:", "Check if you want to allow purchases of Google's test product ids.");
 		GUIContent packageNameLabel = new GUIContent("Package Name [?]", "Your package as defined in Unity.");
-        	GUIContent wp8SimulatorModeLabel = new GUIContent("Run in Simulator (x86 build)");
-        	GUIContent wp8TestModeLabel = new GUIContent("Simulate Store. (Don't forget to adapt IAPMock.xml to fit your IAPs)");
+		GUIContent wp8SimulatorModeLabel = new GUIContent("Run in Simulator (x86 build)");
+		GUIContent wp8TestModeLabel = new GUIContent("Simulate Store. (Don't forget to adapt IAPMock.xml to fit your IAPs)");
 
 		GUIContent iosSsvLabel = new GUIContent("Fraud Protection [?]:", "Check if you want to turn on purchases verification with SOOMLA Fraud Protection Service.");
     	GUIContent iosVerifyOnServerFailureLabel = new GUIContent("Verify On Server Failure [?]:", "Check if you want your purchases get validated if server failure happens.");
@@ -292,16 +294,15 @@ namespace Soomla.Store
 		public static string AndroidPublicKey
 		{
 			get {
-				string value;
-				return SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("AndroidPublicKey", out value) ? value : AND_PUB_KEY_DEFAULT;
+				string value = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "AndroidPublicKey");
+				return value != null ? value : AND_PUB_KEY_DEFAULT;
 			}
 			set
 			{
-				string v;
-				SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("AndroidPublicKey", out v);
+				string v = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "AndroidPublicKey");
 				if (v != value)
 				{
-					SoomlaEditorScript.Instance.setSettingsValue("AndroidPublicKey",value);
+					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "AndroidPublicKey", value.ToString());
 					SoomlaEditorScript.DirtyEditor ();
 				}
 			}
@@ -310,16 +311,15 @@ namespace Soomla.Store
 		public static string PlayClientId
 		{
 			get {
-				string value;
-				return SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("PlayClientId", out value) ? value : PLAY_CLIENT_ID_DEFAULT;
+				string value = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "PlayClientId");
+				return value != null ? value : PLAY_CLIENT_ID_DEFAULT;
 			}
 			set
 			{
-				string v;
-				SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("PlayClientId", out v);
+				string v = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "PlayClientId");
 				if (v != value)
 				{
-					SoomlaEditorScript.Instance.setSettingsValue("PlayClientId",value);
+					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "PlayClientId", value.ToString());
 					SoomlaEditorScript.DirtyEditor ();
 				}
 			}
@@ -328,16 +328,15 @@ namespace Soomla.Store
 		public static string PlayClientSecret
 		{
 			get {
-				string value;
-				return SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("PlayClientSecret", out value) ? value : PLAY_CLIENT_SECRET_DEFAULT;
+				string value = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "PlayClientSecret");
+				return value != null ? value : PLAY_CLIENT_SECRET_DEFAULT;
 			}
 			set
 			{
-				string v;
-				SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("PlayClientSecret", out v);
+				string v = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "PlayClientSecret");
 				if (v != value)
 				{
-					SoomlaEditorScript.Instance.setSettingsValue("PlayClientSecret",value);
+					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "PlayClientSecret", value);
 					SoomlaEditorScript.DirtyEditor ();
 				}
 			}
@@ -346,16 +345,15 @@ namespace Soomla.Store
 		public static string PlayRefreshToken
 		{
 			get {
-				string value;
-				return SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("PlayRefreshToken", out value) ? value : PLAY_REFRESH_TOKEN_DEFAULT;
+				string value = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "PlayRefreshToken");
+				return value != null ? value : PLAY_REFRESH_TOKEN_DEFAULT;
 			}
 			set
 			{
-				string v;
-				SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("PlayRefreshToken", out v);
+				string v = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "PlayRefreshToken");
 				if (v != value)
 				{
-					SoomlaEditorScript.Instance.setSettingsValue("PlayRefreshToken",value);
+					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "PlayRefreshToken", value);
 					SoomlaEditorScript.DirtyEditor ();
 				}
 			}
@@ -364,16 +362,15 @@ namespace Soomla.Store
 		public static bool PlayVerifyOnServerFailure
 		{
 			get {
-				string value;
-				return SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("PlayVerifyOnServerFailure", out value) ? Convert.ToBoolean(value) : false;
+				string value = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "PlayVerifyOnServerFailure");
+				return value != null ? Convert.ToBoolean(value) : false;
 			}
 			set
 			{
-				string v;
-				SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("PlayVerifyOnServerFailure", out v);
+				string v = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "PlayVerifyOnServerFailure");
 				if (Convert.ToBoolean(v) != value)
 				{
-					SoomlaEditorScript.Instance.setSettingsValue("PlayVerifyOnServerFailure", value.ToString());
+					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "PlayVerifyOnServerFailure", value.ToString());
 					SoomlaEditorScript.DirtyEditor ();
 				}
 			}
@@ -382,16 +379,15 @@ namespace Soomla.Store
 		public static bool AndroidTestPurchases
 		{
 			get {
-				string value;
-				return SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("AndroidTestPurchases", out value) ? Convert.ToBoolean(value) : false;
+				string value = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "AndroidTestPurchases");
+				return value != null ? Convert.ToBoolean(value) : false;
 			}
 			set
 			{
-				string v;
-				SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("AndroidTestPurchases", out v);
+				string v = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "AndroidTestPurchases");
 				if (Convert.ToBoolean(v) != value)
 				{
-					SoomlaEditorScript.Instance.setSettingsValue("AndroidTestPurchases",value.ToString());
+					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "AndroidTestPurchases", value.ToString());
 					SoomlaEditorScript.DirtyEditor ();
 				}
 			}
@@ -400,16 +396,15 @@ namespace Soomla.Store
 		public static bool PlaySsvValidation
 		{
 			get {
-				string value;
-				return SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("PlaySsvValidation", out value) ? Convert.ToBoolean(value) : false;
+				string value = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "PlaySsvValidation");
+				return value != null ? Convert.ToBoolean(value) : false;
 			}
 			set
 			{
-				string v;
-				SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("PlaySsvValidation", out v);
+				string v = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "PlaySsvValidation");
 				if (Convert.ToBoolean(v) != value)
 				{
-					SoomlaEditorScript.Instance.setSettingsValue("PlaySsvValidation",value.ToString());
+					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "PlaySsvValidation", value.ToString());
 					SoomlaEditorScript.DirtyEditor ();
 				}
 			}
@@ -418,16 +413,15 @@ namespace Soomla.Store
 		public static bool IosSSV
 		{
 			get {
-				string value;
-				return SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("IosSSV", out value) ? Convert.ToBoolean(value) : false;
+				string value = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "IosSSV");
+				return value != null ? Convert.ToBoolean(value) : false;
 			}
 			set
 			{
-				string v;
-				SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("IosSSV", out v);
+				string v = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "IosSSV");
 				if (Convert.ToBoolean(v) != value)
 				{
-					SoomlaEditorScript.Instance.setSettingsValue("IosSSV",value.ToString());
+					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "IosSSV", value.ToString());
 					SoomlaEditorScript.DirtyEditor ();
 				}
 			}
@@ -436,16 +430,15 @@ namespace Soomla.Store
 		public static bool IosVerifyOnServerFailure
 		{
 			get {
-				string value;
-				return SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("IosVerifyOnServerFailure", out value) ? Convert.ToBoolean(value) : false;
+				string value = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "IosVerifyOnServerFailure");
+				return value != null ? Convert.ToBoolean(value) : false;
 			}
 			set
 			{
-				string v;
-				SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("IosVerifyOnServerFailure", out v);
+				string v = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "IosVerifyOnServerFailure");
 				if (Convert.ToBoolean(v) != value)
 				{
-					SoomlaEditorScript.Instance.setSettingsValue("IosVerifyOnServerFailure", value.ToString());
+					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "IosVerifyOnServerFailure", value.ToString());
 					SoomlaEditorScript.DirtyEditor ();
 				}
 			}
@@ -454,16 +447,15 @@ namespace Soomla.Store
     	public static bool NoneBP
 		{
 			get {
-				string value;
-				return SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("NoneBP", out value) ? Convert.ToBoolean(value) : false;
+				string value = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "NoneBP");
+				return value != null ? Convert.ToBoolean(value) : false;
 			}
 			set
 			{
-				string v;
-				SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("NoneBP", out v);
+				string v = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "NoneBP");
 				if (Convert.ToBoolean(v) != value)
 				{
-					SoomlaEditorScript.Instance.setSettingsValue("NoneBP",value.ToString());
+					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "NoneBP", value.ToString());
 					SoomlaEditorScript.DirtyEditor ();
 				}
 			}
@@ -472,16 +464,15 @@ namespace Soomla.Store
 		public static bool GPlayBP
 		{
 			get {
-				string value;
-				return SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("GPlayBP", out value) ? Convert.ToBoolean(value) : false;
+				string value = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "GPlayBP");
+				return value != null ? Convert.ToBoolean(value) : false;
 			}
 			set
 			{
-				string v;
-				SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("GPlayBP", out v);
+				string v = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "GPlayBP");
 				if (Convert.ToBoolean(v) != value)
 				{
-					SoomlaEditorScript.Instance.setSettingsValue("GPlayBP",value.ToString());
+					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "GPlayBP", value.ToString());
 					SoomlaEditorScript.DirtyEditor ();
 				}
 			}
@@ -490,16 +481,15 @@ namespace Soomla.Store
 		public static bool AmazonBP
 		{
 			get {
-				string value;
-				return SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("AmazonBP", out value) ? Convert.ToBoolean(value) : false;
+				string value = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "AmazonBP");
+				return value != null ? Convert.ToBoolean(value) : false;
 			}
 			set
 			{
-				string v;
-				SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("AmazonBP", out v);
+				string v = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "AmazonBP");
 				if (Convert.ToBoolean(v) != value)
 				{
-					SoomlaEditorScript.Instance.setSettingsValue("AmazonBP",value.ToString());
+					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "AmazonBP", value.ToString());
 					SoomlaEditorScript.DirtyEditor ();
 				}
 			}
@@ -509,16 +499,15 @@ namespace Soomla.Store
         {
             get
             {
-                string value;
-                return SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("WP8SimulatorBuild", out value) ? Convert.ToBoolean(value) : false;
+				string value = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "WP8SimulatorBuild");
+                return value != null ? Convert.ToBoolean(value) : false;
             }
             set
             {
-                string v;
-                SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("WP8SimulatorBuild", out v);
+				string v = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "WP8SimulatorBuild");
                 if (Convert.ToBoolean(v) != value)
                 {
-                    SoomlaEditorScript.Instance.setSettingsValue("WP8SimulatorBuild", value.ToString());
+					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "WP8SimulatorBuild", value.ToString());
                     SoomlaEditorScript.DirtyEditor();
 #if UNITY_EDITOR
                     if (value == true)
@@ -548,16 +537,15 @@ namespace Soomla.Store
         {
             get
             {
-                string value;
-                return SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("WP8TestMode", out value) ? Convert.ToBoolean(value) : false;
+                string value = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "WP8TestMode");
+                return value != null ? Convert.ToBoolean(value) : false;
             }
             set
             {
-                string v;
-                SoomlaEditorScript.Instance.SoomlaSettings.TryGetValue("WP8TestMode", out v);
+				string v = SoomlaEditorScript.GetConfigValue(StoreModulePrefix, "WP8TestMode");
                 if (Convert.ToBoolean(v) != value)
                 {
-                    SoomlaEditorScript.Instance.setSettingsValue("WP8TestMode", value.ToString());
+					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "WP8TestMode", value.ToString());
                     SoomlaEditorScript.DirtyEditor();
                 }
             }

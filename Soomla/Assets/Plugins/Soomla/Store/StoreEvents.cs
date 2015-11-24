@@ -423,7 +423,8 @@ namespace Soomla.Store {
 		public void onBillingSupported(string message) {
 			SoomlaUtils.LogDebug(TAG, "SOOMLA/UNITY onBillingSupported");
 
-			StoreEvents.OnBillingSupported(new BillingSupportedEvent());
+			StoreEvents.OnBillingSupported();
+			//StoreEvents.OnBillingSupported(new BillingSupportedEvent());
 		}
 
 		/// <summary>
@@ -434,7 +435,8 @@ namespace Soomla.Store {
 		public void onBillingNotSupported(string message) {
 			SoomlaUtils.LogDebug(TAG, "SOOMLA/UNITY onBillingNotSupported");
 
-			StoreEvents.OnBillingNotSupported(new BillingNotSupportedEvent() );
+			StoreEvents.OnBillingNotSupported();
+			//StoreEvents.OnBillingNotSupported(new BillingNotSupportedEvent() );
 		}
 
 		/// <summary>
@@ -457,7 +459,8 @@ namespace Soomla.Store {
 
 			StoreInventory.RefreshOnCurrencyBalanceChanged(vc, balance, amountAdded);
 
-			StoreEvents.OnCurrencyBalanceChanged( new CurrencyBalanceChangedEvent(vc, balance, amountAdded) );
+			StoreEvents.OnCurrencyBalanceChanged(vc, balance, amountAdded);
+			//StoreEvents.OnCurrencyBalanceChanged( new CurrencyBalanceChangedEvent(vc, balance, amountAdded) );
 
 			if (alsoPush) {
 #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
@@ -486,7 +489,8 @@ namespace Soomla.Store {
 
 			StoreInventory.RefreshOnGoodBalanceChanged(vg, balance, amountAdded);
 
-			StoreEvents.OnGoodBalanceChanged(new GoodBalanceChangedEvent(vg, balance, amountAdded) );
+			StoreEvents.OnGoodBalanceChanged(vg, balance, amountAdded);
+			//StoreEvents.OnGoodBalanceChanged(new GoodBalanceChangedEvent(vg, balance, amountAdded) );
 
 			if (alsoPush) {
 #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
@@ -512,7 +516,8 @@ namespace Soomla.Store {
 
 			StoreInventory.RefreshOnGoodEquipped(vg);
 
-			StoreEvents.OnGoodEquipped(new GoodEquippedEvent(vg) );
+			StoreEvents.OnGoodEquipped(vg);
+			//StoreEvents.OnGoodEquipped(new GoodEquippedEvent(vg) );
 
 			if (alsoPush) {
 #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
@@ -538,7 +543,8 @@ namespace Soomla.Store {
 
 			StoreInventory.RefreshOnGoodUnEquipped(vg);
 
-			StoreEvents.OnGoodUnEquipped(new GoodUnEquippedEvent(vg));
+			StoreEvents.OnGoodUnEquipped(vg);
+			//StoreEvents.OnGoodUnEquipped(new GoodUnEquippedEvent(vg));
 
 			if (alsoPush) {
 #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
@@ -569,7 +575,8 @@ namespace Soomla.Store {
 
 			StoreInventory.RefreshOnGoodUpgrade(vg, vgu);
 
-			StoreEvents.OnGoodUpgrade(new GoodUpgradeEvent(vg, vgu));
+			StoreEvents.OnGoodUpgrade(vg, vgu);
+			//StoreEvents.OnGoodUpgrade(new GoodUpgradeEvent(vg, vgu));
 
 			if (alsoPush) {
 #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
@@ -597,7 +604,8 @@ namespace Soomla.Store {
 				payload = eventJSON["payload"].str;
 			}
 
-			StoreEvents.OnItemPurchased(new ItemPurchasedEvent(pvi, payload) );
+			StoreEvents.OnItemPurchased(pvi, payload);
+			//StoreEvents.OnItemPurchased(new ItemPurchasedEvent(pvi, payload) );
 
 			if (alsoPush) {
 #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
@@ -620,7 +628,8 @@ namespace Soomla.Store {
 			var eventJSON = new JSONObject(message);
 
 			PurchasableVirtualItem pvi = (PurchasableVirtualItem)StoreInfo.GetItemByItemId(eventJSON["itemId"].str);
-			StoreEvents.OnItemPurchaseStarted(new ItemPurchaseStartedEvent(pvi) );
+			StoreEvents.OnItemPurchaseStarted(pvi);
+			//StoreEvents.OnItemPurchaseStarted(new ItemPurchaseStartedEvent(pvi) );
 
 			if (alsoPush) {
 #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
@@ -641,7 +650,8 @@ namespace Soomla.Store {
 			var eventJSON = new JSONObject(message);
 
 			PurchasableVirtualItem pvi = (PurchasableVirtualItem)StoreInfo.GetItemByItemId(eventJSON["itemId"].str);
-			StoreEvents.OnMarketPurchaseCancelled( new MarketPurchaseCancelledEvent(pvi) );
+			StoreEvents.OnMarketPurchaseCancelled(pvi);
+			//StoreEvents.OnMarketPurchaseCancelled( new MarketPurchaseCancelledEvent(pvi) );
 		}
         
         /// <summary>
@@ -663,7 +673,8 @@ namespace Soomla.Store {
             if (eventJSON.HasField("payload")) {
                 payload = eventJSON["payload"].str;
             }
-			StoreEvents.OnMarketPurchaseDeferred(new MarketPurchaseDeferredEvent(pvi, payload) );
+			StoreEvents.OnMarketPurchaseDeferred(pvi, payload);
+			//StoreEvents.OnMarketPurchaseDeferred(new MarketPurchaseDeferredEvent(pvi, payload) );
         }
 
 		/// <summary>
@@ -692,7 +703,8 @@ namespace Soomla.Store {
 				}
 			}
 
-			StoreEvents.OnMarketPurchase(new MarketPurchaseEvent(pvi, payload, extra) );
+			StoreEvents.OnMarketPurchase(pvi, payload, extra);
+			//StoreEvents.OnMarketPurchase(new MarketPurchaseEvent(pvi, payload, extra) );
 		}
 
 		/// <summary>
@@ -706,7 +718,8 @@ namespace Soomla.Store {
 			var eventJSON = new JSONObject(message);
 
 			PurchasableVirtualItem pvi = (PurchasableVirtualItem)StoreInfo.GetItemByItemId(eventJSON["itemId"].str);
-			StoreEvents.OnMarketPurchaseStarted(new MarketPurchaseStartedEvent(pvi) );
+			StoreEvents.OnMarketPurchaseStarted(pvi);
+			//StoreEvents.OnMarketPurchaseStarted(new MarketPurchaseStartedEvent(pvi) );
 		}
 
 		/// <summary>
@@ -719,7 +732,8 @@ namespace Soomla.Store {
 			var eventJSON = new JSONObject(message);
 
 			PurchasableVirtualItem pvi = (PurchasableVirtualItem)StoreInfo.GetItemByItemId(eventJSON["itemId"].str);
-			StoreEvents.OnMarketRefund(new MarketRefundEvent(pvi) );
+			StoreEvents.OnMarketRefund(pvi);
+			//StoreEvents.OnMarketRefund(new MarketRefundEvent(pvi) );
 		}
 
 		/// <summary>
@@ -734,7 +748,8 @@ namespace Soomla.Store {
 			var eventJSON = new JSONObject(message);
 
 			bool success = eventJSON["success"].b;
-			StoreEvents.OnRestoreTransactionsFinished(new RestoreTransactionsFinishedEvent(success) );
+			StoreEvents.OnRestoreTransactionsFinished(success);
+			//StoreEvents.OnRestoreTransactionsFinished(new RestoreTransactionsFinishedEvent(success) );
 		}
 
 		/// <summary>
@@ -746,7 +761,8 @@ namespace Soomla.Store {
 		public void onRestoreTransactionsStarted(string message) {
 			SoomlaUtils.LogDebug(TAG, "SOOMLA/UNITY onRestoreTransactionsStarted");
 
-			StoreEvents.OnRestoreTransactionsStarted(new RestoreTransactionsStartedEvent());
+			StoreEvents.OnRestoreTransactionsStarted();
+			//StoreEvents.OnRestoreTransactionsStarted(new RestoreTransactionsStartedEvent());
 		}
 
 		/// <summary>
@@ -758,7 +774,8 @@ namespace Soomla.Store {
 		public void onMarketItemsRefreshStarted(string message) {
 			SoomlaUtils.LogDebug(TAG, "SOOMLA/UNITY onMarketItemsRefreshStarted");
 
-			StoreEvents.OnMarketItemsRefreshStarted(new MarketItemsRefreshStartedEvent());
+			StoreEvents.OnMarketItemsRefreshStarted();
+			//StoreEvents.OnMarketItemsRefreshStarted(new MarketItemsRefreshStartedEvent());
 		}
 
 		/// <summary>
@@ -773,7 +790,8 @@ namespace Soomla.Store {
 			var eventJSON = new JSONObject(message);
 
 			string errorMessage = eventJSON["errorMessage"].str;
-			StoreEvents.OnMarketItemsRefreshFailed(new MarketItemsRefreshFailedEvent(errorMessage) );
+			StoreEvents.OnMarketItemsRefreshFailed(errorMessage);
+			//StoreEvents.OnMarketItemsRefreshFailed(new MarketItemsRefreshFailedEvent(errorMessage) );
 		}
 
 		/// <summary>
@@ -817,7 +835,8 @@ namespace Soomla.Store {
 				StoreInfo.Save(virtualItems, false);
 			}
 
-			StoreEvents.OnMarketItemsRefreshFinished(new MarketItemsRefreshFinishedEvent(marketItems) );
+			StoreEvents.OnMarketItemsRefreshFinished(marketItems);
+			//StoreEvents.OnMarketItemsRefreshFinished(new MarketItemsRefreshFinishedEvent(marketItems) );
 		}
 
 		/// <summary>
@@ -832,7 +851,8 @@ namespace Soomla.Store {
 			SoomlaUtils.LogDebug(TAG, "SOOMLA/UNITY OnUnexpectedStoreError");
 
 			JSONObject eventJSON = new JSONObject(message);
-			StoreEvents.OnUnexpectedStoreError(new UnexpectedStoreErrorEvent((int) eventJSON ["errorCode"].n));
+			StoreEvents.OnUnexpectedStoreError((int) eventJSON ["errorCode"].n);
+			//StoreEvents.OnUnexpectedStoreError(new UnexpectedStoreErrorEvent((int) eventJSON ["errorCode"].n));
 
 			if (alsoPush) {
 #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
@@ -854,7 +874,8 @@ namespace Soomla.Store {
 
 			StoreInventory.RefreshLocalInventory();
 
-			StoreEvents.OnSoomlaStoreInitialized(new SoomlaStoreInitializedEvent());
+			StoreEvents.OnSoomlaStoreInitialized();
+			//StoreEvents.OnSoomlaStoreInitialized(new SoomlaStoreInitializedEvent());
 
 			if (alsoPush) {
 #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
@@ -884,47 +905,68 @@ namespace Soomla.Store {
 
 		public delegate void Action();
 
-		public static Action<BillingNotSupportedEvent> OnBillingNotSupported = delegate {};
+		public static Action OnBillingNotSupported = delegate {};
+		//public static Action<BillingNotSupportedEvent> OnBillingNotSupported = delegate {};
 
-		public static Action<BillingSupportedEvent> OnBillingSupported = delegate {};
+		public static Action OnBillingSupported = delegate {};
+		//public static Action<BillingSupportedEvent> OnBillingSupported = delegate {};
 
-		public static Action<CurrencyBalanceChangedEvent> OnCurrencyBalanceChanged = delegate {};
+		public static Action<VirtualCurrency, int, int> OnCurrencyBalanceChanged = delegate {};
+		//public static Action<CurrencyBalanceChangedEvent> OnCurrencyBalanceChanged = delegate {};
 
-		public static Action<GoodBalanceChangedEvent> OnGoodBalanceChanged = delegate {};
+		public static Action<VirtualGood, int, int> OnGoodBalanceChanged = delegate {};
+		//public static Action<GoodBalanceChangedEvent> OnGoodBalanceChanged = delegate {};
 
-		public static Action<GoodEquippedEvent> OnGoodEquipped = delegate {};
+		public static Action<EquippableVG> OnGoodEquipped = delegate {};
+		//public static Action<GoodEquippedEvent> OnGoodEquipped = delegate {};
 
-		public static Action<GoodUnEquippedEvent> OnGoodUnEquipped = delegate {};
+		public static Action<EquippableVG> OnGoodUnEquipped = delegate {};
+		//public static Action<GoodUnEquippedEvent> OnGoodUnEquipped = delegate {};
 
-		public static Action<GoodUpgradeEvent> OnGoodUpgrade = delegate {};
+		public static Action<VirtualGood, UpgradeVG> OnGoodUpgrade = delegate {};
+		//public static Action<GoodUpgradeEvent> OnGoodUpgrade = delegate {};
 
-		public static Action<ItemPurchasedEvent> OnItemPurchased = delegate {};
+		public static Action<PurchasableVirtualItem, string> OnItemPurchased = delegate {};
+		//public static Action<ItemPurchasedEvent> OnItemPurchased = delegate {};
 
-		public static Action<ItemPurchaseStartedEvent> OnItemPurchaseStarted = delegate {};
+		public static Action<PurchasableVirtualItem> OnItemPurchaseStarted = delegate {};
+		//public static Action<ItemPurchaseStartedEvent> OnItemPurchaseStarted = delegate {};
 
-		public static Action<MarketPurchaseCancelledEvent> OnMarketPurchaseCancelled = delegate {};
+		public static Action<PurchasableVirtualItem> OnMarketPurchaseCancelled = delegate {};
+		//public static Action<MarketPurchaseCancelledEvent> OnMarketPurchaseCancelled = delegate {};
 
-		public static Action<MarketPurchaseDeferredEvent> OnMarketPurchaseDeferred = delegate {};
+		public static Action<PurchasableVirtualItem, string> OnMarketPurchaseDeferred = delegate {};
+		//public static Action<MarketPurchaseDeferredEvent> OnMarketPurchaseDeferred = delegate {};
         
-		public static Action<MarketPurchaseEvent> OnMarketPurchase = delegate {};
+		public static Action<PurchasableVirtualItem, string, Dictionary<string, string>> OnMarketPurchase = delegate {};
+		//public static Action<MarketPurchaseEvent> OnMarketPurchase = delegate {};
 
-		public static Action<MarketPurchaseStartedEvent> OnMarketPurchaseStarted = delegate {};
+		public static Action<PurchasableVirtualItem> OnMarketPurchaseStarted = delegate {};
+		//public static Action<MarketPurchaseStartedEvent> OnMarketPurchaseStarted = delegate {};
 
-		public static Action<MarketRefundEvent> OnMarketRefund = delegate {};
+		public static Action<PurchasableVirtualItem> OnMarketRefund = delegate {};
+		//public static Action<MarketRefundEvent> OnMarketRefund = delegate {};
 
-		public static Action<RestoreTransactionsFinishedEvent> OnRestoreTransactionsFinished = delegate {};
+		public static Action<bool> OnRestoreTransactionsFinished = delegate {};
+		//public static Action<RestoreTransactionsFinishedEvent> OnRestoreTransactionsFinished = delegate {};
 
-		public static Action<RestoreTransactionsStartedEvent> OnRestoreTransactionsStarted = delegate {};
+		public static Action OnRestoreTransactionsStarted = delegate {};
+		//public static Action<RestoreTransactionsStartedEvent> OnRestoreTransactionsStarted = delegate {};
 
-		public static Action<MarketItemsRefreshStartedEvent> OnMarketItemsRefreshStarted = delegate {};
+		public static Action OnMarketItemsRefreshStarted = delegate {};
+		//public static Action<MarketItemsRefreshStartedEvent> OnMarketItemsRefreshStarted = delegate {};
 
-		public static Action<MarketItemsRefreshFailedEvent> OnMarketItemsRefreshFailed = delegate {};
+		public static Action<string> OnMarketItemsRefreshFailed = delegate {};
+		//public static Action<MarketItemsRefreshFailedEvent> OnMarketItemsRefreshFailed = delegate {};
 
-		public static Action<MarketItemsRefreshFinishedEvent> OnMarketItemsRefreshFinished = delegate {};
+		public static Action<List<MarketItem>> OnMarketItemsRefreshFinished = delegate {};
+		//public static Action<MarketItemsRefreshFinishedEvent> OnMarketItemsRefreshFinished = delegate {};
 
-		public static Action<UnexpectedStoreErrorEvent> OnUnexpectedStoreError = delegate {};
+		public static Action<int> OnUnexpectedStoreError = delegate {};
+		//public static Action<UnexpectedStoreErrorEvent> OnUnexpectedStoreError = delegate {};
 
-		public static Action<SoomlaStoreInitializedEvent> OnSoomlaStoreInitialized = delegate {};
+		public static Action OnSoomlaStoreInitialized = delegate {};
+		//public static Action<SoomlaStoreInitializedEvent> OnSoomlaStoreInitialized = delegate {};
 
 #if UNITY_ANDROID && !UNITY_EDITOR
 		public static Action OnIabServiceStarted = delegate {};

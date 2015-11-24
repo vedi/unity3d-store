@@ -108,11 +108,11 @@ namespace Soomla.Store.Example {
 			SoomlaStore.Initialize(new MuffinRushAssets());
 		}
 
-		public void onUnexpectedStoreError(UnexpectedStoreErrorEvent e) {
-			SoomlaUtils.LogError ("ExampleEventHandler", "error with code: " + e.getErrorCode());
+		public void onUnexpectedStoreError(int errorCode) {
+			SoomlaUtils.LogError ("ExampleEventHandler", "error with code: " + errorCode);
 		}
 
-		public void onSoomlaStoreInitialized(SoomlaStoreInitializedEvent e) {
+		public void onSoomlaStoreInitialized() {
 
 			// some usage examples for add/remove currency
 			// some examples
@@ -156,7 +156,7 @@ namespace Soomla.Store.Example {
 			}
 		}
 
-		public void onCurrencyBalanceChanged(CurrencyBalanceChangedEvent e) {
+		public void onCurrencyBalanceChanged(VirtualCurrency virtualCurrency, int balance, int amountAdded) {
 			if (itemsAffordability != null)
 			{
 				List<string> keys = new List<string> (itemsAffordability.Keys);

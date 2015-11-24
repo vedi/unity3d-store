@@ -33,9 +33,9 @@ namespace Soomla.Store
 	public class StoreSettings : ISoomlaSettings
 	{
 
-#if UNITY_EDITOR
-
 		private static string StoreModulePrefix = "Store";
+
+#if UNITY_EDITOR
 
 		static StoreSettings instance = new StoreSettings();
 

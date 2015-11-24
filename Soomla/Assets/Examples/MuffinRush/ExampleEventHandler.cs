@@ -58,8 +58,8 @@ namespace Soomla.Store.Example {
 		/// Handles unexpected errors with error code.
 		/// </summary>
 		/// <param name="errorCode">The error code.</param>
-		public void onUnexpectedStoreError(UnexpectedStoreErrorEvent e) {
-			SoomlaUtils.LogError ("ExampleEventHandler", "error with code: " + e.getErrorCode());
+		public void onUnexpectedStoreError(int errorCode) {
+			SoomlaUtils.LogError ("ExampleEventHandler", "error with code: " + errorCode);
 		}
 
 		/// <summary>
@@ -67,7 +67,7 @@ namespace Soomla.Store.Example {
 		/// </summary>
 		/// <param name="pvi">Purchasable virtual item.</param>
 		/// <param name="purchaseToken">Purchase token.</param>
-		public void onMarketPurchase(MarketPurchaseEvent e) {
+		public void onMarketPurchase(PurchasableVirtualItem pvi, string payload, Dictionary<string, string> extra) {
 
 		}
 
@@ -75,7 +75,7 @@ namespace Soomla.Store.Example {
 		/// Handles a market refund event.
 		/// </summary>
 		/// <param name="pvi">Purchasable virtual item.</param>
-		public void onMarketRefund(MarketRefundEvent e) {
+		public void onMarketRefund(PurchasableVirtualItem pvi) {
 
 		}
 
@@ -83,7 +83,7 @@ namespace Soomla.Store.Example {
 		/// Handles an item purchase event.
 		/// </summary>
 		/// <param name="pvi">Purchasable virtual item.</param>
-		public void onItemPurchased(ItemPurchasedEvent e) {
+		public void onItemPurchased(PurchasableVirtualItem pvi, string payload) {
 
 		}
 
@@ -91,7 +91,7 @@ namespace Soomla.Store.Example {
 		/// Handles a good equipped event.
 		/// </summary>
 		/// <param name="good">Equippable virtual good.</param>
-		public void onGoodEquipped(GoodEquippedEvent e) {
+		public void onGoodEquipped(EquippableVG good) {
 
 		}
 
@@ -99,7 +99,7 @@ namespace Soomla.Store.Example {
 		/// Handles a good unequipped event.
 		/// </summary>
 		/// <param name="good">Equippable virtual good.</param>
-		public void onGoodUnequipped(GoodUnEquippedEvent e) {
+		public void onGoodUnequipped(EquippableVG good) {
 
 		}
 
@@ -109,21 +109,21 @@ namespace Soomla.Store.Example {
 		/// <param name="good">Virtual good that is being upgraded.</param>
 		/// <param name="currentUpgrade">The current upgrade that the given virtual
 		/// good is being upgraded to.</param>
-		public void onGoodUpgrade(GoodUpgradeEvent e) {
+		public void onGoodUpgrade(VirtualGood good, UpgradeVG currentUpgrade) {
 
 		}
 
 		/// <summary>
 		/// Handles a billing supported event.
 		/// </summary>
-		public void onBillingSupported(BillingSupportedEvent e) {
+		public void onBillingSupported() {
 
 		}
 
 		/// <summary>
 		/// Handles a billing NOT supported event.
 		/// </summary>
-		public void onBillingNotSupported(BillingNotSupportedEvent e) {
+		public void onBillingNotSupported() {
 
 		}
 
@@ -131,7 +131,7 @@ namespace Soomla.Store.Example {
 		/// Handles a market purchase started event.
 		/// </summary>
 		/// <param name="pvi">Purchasable virtual item.</param>
-		public void onMarketPurchaseStarted(MarketPurchaseStartedEvent e) {
+		public void onMarketPurchaseStarted(PurchasableVirtualItem pvi) {
 
 		}
 
@@ -139,7 +139,7 @@ namespace Soomla.Store.Example {
 		/// Handles an item purchase started event.
 		/// </summary>
 		/// <param name="pvi">Purchasable virtual item.</param>
-		public void onItemPurchaseStarted(ItemPurchaseStartedEvent e) {
+		public void onItemPurchaseStarted(PurchasableVirtualItem pvi) {
 
 		}
 
@@ -147,7 +147,7 @@ namespace Soomla.Store.Example {
 		/// Handles an item purchase cancelled event.
 		/// </summary>
 		/// <param name="pvi">Purchasable virtual item.</param>
-		public void onMarketPurchaseCancelled(MarketPurchaseCancelledEvent e) {
+		public void onMarketPurchaseCancelled(PurchasableVirtualItem pvi) {
 		}
         
 		/// <summary>
@@ -155,7 +155,7 @@ namespace Soomla.Store.Example {
 		/// </summary>
 		/// <param name="pvi">Purchasable virtual item.</param>
 		/// <param name="payload">Developer supplied payload.</param>
-		public void onMarketPurchaseDeferred(MarketPurchaseDeferredEvent e) {
+		public void onMarketPurchaseDeferred(PurchasableVirtualItem pvi, string payload) {
 		}
         
 		/// <summary>
@@ -164,7 +164,7 @@ namespace Soomla.Store.Example {
 		/// <param name="virtualCurrency">Virtual currency whose balance has changed.</param>
 		/// <param name="balance">Balance of the given virtual currency.</param>
 		/// <param name="amountAdded">Amount added to the balance.</param>
-		public void onCurrencyBalanceChanged(CurrencyBalanceChangedEvent e) {
+		public void onCurrencyBalanceChanged(VirtualCurrency virtualCurrency, int balance, int amountAdded) {
 
 		}
 
@@ -174,14 +174,14 @@ namespace Soomla.Store.Example {
 		/// <param name="good">Virtual good whose balance has changed.</param>
 		/// <param name="balance">Balance.</param>
 		/// <param name="amountAdded">Amount added.</param>
-		public void onGoodBalanceChanged(GoodBalanceChangedEvent e) {
+		public void onGoodBalanceChanged(VirtualGood good, int balance, int amountAdded) {
 
 		}
 
 		/// <summary>
 		/// Handles a restore Transactions process started event.
 		/// </summary>
-		public void onRestoreTransactionsStarted(RestoreTransactionsStartedEvent e) {
+		public void onRestoreTransactionsStarted() {
 
 		}
 
@@ -189,14 +189,14 @@ namespace Soomla.Store.Example {
 		/// Handles a restore transactions process finished event.
 		/// </summary>
 		/// <param name="success">If set to <c>true</c> success.</param>
-		public void onRestoreTransactionsFinished(RestoreTransactionsFinishedEvent e) {
+		public void onRestoreTransactionsFinished(bool success) {
 
 		}
 
 		/// <summary>
 		/// Handles a store controller initialized event.
 		/// </summary>
-		public void onSoomlaStoreInitialized(SoomlaStoreInitializedEvent e) {
+		public void onSoomlaStoreInitialized() {
 			
 		}
 

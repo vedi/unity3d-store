@@ -39,7 +39,7 @@ namespace Soomla.Store
 
 		static StoreSettings instance = new StoreSettings();
 
-		static string currentModuleVersion = "1.9.1";
+		static string currentModuleVersion = "1.9.2";
 
 		static StoreSettings()
 		{

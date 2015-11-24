@@ -1,3 +1,11 @@
+### v1.9.2 [view commit logs](https://github.com/soomla/unity3d-store/compare/v1.9.1...v1.9.2)
+
+* New Features
+  * Added OnVerificationStarted event
+
+* Changes
+  * Minor improvements and rearrangements to Editor script
+
 ### v1.9.1 [view commit logs](https://github.com/soomla/unity3d-store/compare/v1.9.0...v1.9.1)
 
 * Changes

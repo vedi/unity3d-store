@@ -861,6 +861,20 @@ namespace Soomla.Store {
 			}
 		}
 
+        /// <summary>
+        /// Handles the <c>onVerificationStarted</c> event, which is fired when the verification of a Market purchase has started.
+        /// </summary>
+        /// <param name="message">Message that contains information about the market purchase that is being
+        /// verified.</param>
+        public void onVerificationStarted(string message) {
+            SoomlaUtils.LogDebug(TAG, "SOOMLA/UNITY onVerificationStarted: " + message);
+
+            var eventJSON = new JSONObject(message);
+
+            PurchasableVirtualItem pvi = (PurchasableVirtualItem)StoreInfo.GetItemByItemId(eventJSON["itemId"].str);
+            StoreEvents.OnVerificationStarted(pvi);
+        }
+
 		/// <summary>
 		/// Handles the <c>onSoomlaStoreInitialized</c> event, which is fired when <c>SoomlaStore</c>
 		/// is initialized.
@@ -964,6 +978,8 @@ namespace Soomla.Store {
 
 		public static Action<int> OnUnexpectedStoreError = delegate {};
 		//public static Action<UnexpectedStoreErrorEvent> OnUnexpectedStoreError = delegate {};
+
+        public static Action<PurchasableVirtualItem> OnVerificationStarted = delegate {};
 
 		public static Action OnSoomlaStoreInitialized = delegate {};
 		//public static Action<SoomlaStoreInitializedEvent> OnSoomlaStoreInitialized = delegate {};

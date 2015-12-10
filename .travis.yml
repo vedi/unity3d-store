@@ -16,4 +16,5 @@ script:
     - ./soomla-native/projects/unity-android-store/build_all
     - ./soomla-native/projects/unity-ios-store/build_all
     - ./deploy/create_deploys
-    - cat deploy/create_unity.log
+    - cat deploy/create_unity_core.log
+    - cat deploy/create_unity_store.log

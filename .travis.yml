@@ -1,5 +1,6 @@
 language: objective-c
 install:
+    - git submodule update --init --recursive
     - curl -o android-sdk.zip http://dl.google.com/android/android-sdk_r24.4.1-macosx.zip
     - unzip android-sdk.zip
     - export ANDROID_HOME=$PWD/android-sdk-macosx

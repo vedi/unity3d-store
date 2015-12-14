@@ -36,12 +36,11 @@ unity3d-store is the Unity3d flavor of SOOMLA's Store Module.
 
 > If you're upgrading from a version below v1.7.x make sure you take soomla-unity3d-core again.
 
-[unity3d-store v1.9.2](http://library.soom.la/fetch/unity3d-store/1.9.2?cf=github)
+[unity3d-store v1.9.3](https://www.assetstore.unity3d.com/en/#!/content/6103)
 
 #### From sources:
  - Clone this repository recursively: `git clone --recursive https://github.com/soomla/unity3d-store.git`
  - Run `./build_all` from project directory
- - Take created binaries from `build` directory and use it!
 
 ## Debugging
 
@@ -60,7 +59,7 @@ $ git clone --recursive git@github.com:soomla/unity3d-store.git
 
 1. First, you'll need to either download (RECOMMENDED) the unity3d-store pre-baked packages, or clone unity3d-store.
 
-  - RECOMMENDED: Download [soomla-unity3d-core](https://github.com/soomla/unity3d-store/raw/master/deploy/out/soomla-unity3d-core.unitypackage) and [unity3d-store](https://github.com/soomla/unity3d-store/raw/master/deploy/out/soomla-unity3d-store.unitypackage)
+  - RECOMMENDED: Download [unity3d-store](https://www.assetstore.unity3d.com/en/#!/content/6103)
 
     OR, if you'd like to work with sources:
 

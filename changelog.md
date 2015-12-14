@@ -1,3 +1,8 @@
+### v1.9.3 [view commit logs](https://github.com/soomla/unity3d-store/compare/v1.9.2...v1.9.3)
+
+* Changes
+  * Added saving user settings to PlayerPrefs
+
 ### v1.9.2 [view commit logs](https://github.com/soomla/unity3d-store/compare/v1.9.1...v1.9.2)
 
 * New Features

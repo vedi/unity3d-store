@@ -49,6 +49,7 @@ namespace Soomla.Store
 			additionalDependFiles.Add("Assets/Plugins/Android/Soomla/libs/AndroidStoreAmazon.jar");
 			additionalDependFiles.Add("Assets/Plugins/Android/Soomla/libs/in-app-purchasing-2.0.1.jar");
 			additionalDependFiles.Add("Assets/Plugins/Android/Soomla/libs/AndroidStoreGooglePlay.jar");
+			additionalDependFiles.Add("Assets/Plugins/Android/Soomla/libs/IInAppBillingService.jar");
 			SoomlaEditorScript.addFileList("Store", "Assets/Soomla/store_file_list", additionalDependFiles.ToArray());
 		}
 
@@ -248,9 +249,13 @@ namespace Soomla.Store
 				if (remove) {
 					FileUtil.DeleteFileOrDirectory(Application.dataPath + "/Plugins/Android/Soomla/libs/AndroidStoreGooglePlay.jar");
 					FileUtil.DeleteFileOrDirectory(Application.dataPath + "/Plugins/Android/Soomla/libs/AndroidStoreGooglePlay.jar.meta");
+					FileUtil.DeleteFileOrDirectory(Application.dataPath + "/Plugins/Android/Soomla/libs/IInAppBillingService.jar");
+					FileUtil.DeleteFileOrDirectory(Application.dataPath + "/Plugins/Android/Soomla/libs/IInAppBillingService.jar.meta");
 				} else {
 					FileUtil.CopyFileOrDirectory(bpRootPath + "google-play/AndroidStoreGooglePlay.jar",
-					                             Application.dataPath + "/Plugins/Android/Soomla/libs/AndroidStoreGooglePlay.jar");
+							Application.dataPath + "/Plugins/Android/Soomla/libs/AndroidStoreGooglePlay.jar");
+					FileUtil.CopyFileOrDirectory(bpRootPath + "google-play/IInAppBillingService.jar",
+							Application.dataPath + "/Plugins/Android/Soomla/libs/IInAppBillingService.jar");
 				}
 			}catch {}
 		}

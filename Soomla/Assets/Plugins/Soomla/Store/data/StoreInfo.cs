@@ -71,6 +71,14 @@ namespace Soomla.Store
 			if (storeAssets == null) {
 				throw new ArgumentException("The given store assets can't be null!");
 			}
+
+			if (storeAssets.GetCurrencies() == null ||
+					storeAssets.GetCurrencyPacks() == null ||
+					storeAssets.GetGoods() == null ||
+					storeAssets.GetCategories() == null) {
+				throw new ArgumentException("All IStoreAssets methods shouldn't return NULL-pointer references!");
+			}
+
 			if (!assetsArrayHasMarketIdDuplicates(storeAssets.GetGoods()) 
 			    || !assetsArrayHasMarketIdDuplicates(storeAssets.GetCurrencyPacks())) {
 				throw new ArgumentException("The given store assets has duplicates at marketItem productId!");

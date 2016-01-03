@@ -245,6 +245,7 @@
 					"../../../submodules/ios-store/SoomlaiOSStore/**",
 					"../../../submodules/ios-store/submodules/soomla-ios-core/SoomlaiOSCore/**",
 					"${UNITY_HEADERS45}/**",
+					"${UNITY_HEADERS53}/**",
 					"../../../submodules/soomla-unity3d-core/soomla-native/projects/unity-soomla-ios-core/SoomlaUnity",
 				);
 				LIBRARY_SEARCH_PATHS = ../../../Soomla/Assets/Plugins/iOS/;

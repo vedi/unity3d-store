@@ -1,3 +1,11 @@
+### v1.10.0 [view commit logs](https://github.com/soomla/unity3d-store/compare/v1.9.3...v1.10.0)
+
+* Changes
+  * Added validation - not allowing null pointers in IStoreAssets
+
+* Fixes
+  * Fixed building in Unity 5.3
+
 ### v1.9.3 [view commit logs](https://github.com/soomla/unity3d-store/compare/v1.9.2...v1.9.3)
 
 * Changes

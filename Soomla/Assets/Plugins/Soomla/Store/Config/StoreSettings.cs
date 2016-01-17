@@ -313,6 +313,7 @@ namespace Soomla.Store
 				if (androidPublicKey != value) {
 					androidPublicKey = value;
 					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "AndroidPublicKey", value.ToString());
+					SoomlaEditorScript.DirtyEditor();
 				}
 			}
 		}
@@ -334,6 +335,7 @@ namespace Soomla.Store
 				if (playClientId != value) {
 					playClientId = value;
 					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "PlayClientId", value.ToString());
+					SoomlaEditorScript.DirtyEditor();
 				}
 			}
 		}
@@ -355,6 +357,7 @@ namespace Soomla.Store
 				if (playClientSecret != value) {
 					playClientSecret = value;
 					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "PlayClientSecret", value);
+					SoomlaEditorScript.DirtyEditor();
 				}
 			}
 		}
@@ -376,6 +379,7 @@ namespace Soomla.Store
 				if (playRefreshToken != value) {
 					playRefreshToken = value;
 					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "PlayRefreshToken", value);
+					SoomlaEditorScript.DirtyEditor();
 				}
 			}
 		}
@@ -396,6 +400,7 @@ namespace Soomla.Store
 				if (playVerifyOnServerFailure != value.ToString()) {
 					playVerifyOnServerFailure = value.ToString();
 					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "PlayVerifyOnServerFailure", value.ToString());
+					SoomlaEditorScript.DirtyEditor();
 				}
 			}
 		}
@@ -416,6 +421,7 @@ namespace Soomla.Store
 				if (androidTestPurchases != value.ToString()) {
 					androidTestPurchases = value.ToString();
 					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "AndroidTestPurchases", value.ToString());
+					SoomlaEditorScript.DirtyEditor();
 				}
 			}
 		}
@@ -436,6 +442,7 @@ namespace Soomla.Store
 				if (playSsvValidation != value.ToString()) {
 					playSsvValidation = value.ToString();
 					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "PlaySsvValidation", value.ToString());
+					SoomlaEditorScript.DirtyEditor();
 				}
 			}
 		}
@@ -456,6 +463,7 @@ namespace Soomla.Store
 				if (iosSSV != value.ToString()) {
 					iosSSV = value.ToString();
 					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "IosSSV", value.ToString());
+					SoomlaEditorScript.DirtyEditor();
 				}
 			}
 		}
@@ -476,6 +484,7 @@ namespace Soomla.Store
 				if (iosVerifyOnServerFailure != value.ToString()) {
 					iosVerifyOnServerFailure = value.ToString();
 					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "IosVerifyOnServerFailure", value.ToString());
+					SoomlaEditorScript.DirtyEditor();
 				}
 			}
 		}
@@ -496,6 +505,7 @@ namespace Soomla.Store
 				if (noneBP != value.ToString()) {
 					noneBP = value.ToString();
 					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "NoneBP", value.ToString());
+					SoomlaEditorScript.DirtyEditor();
 				}
 			}
 		}
@@ -515,6 +525,7 @@ namespace Soomla.Store
 				if (gPlayBP != value.ToString()) {
 					gPlayBP = value.ToString();
 					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "GPlayBP", value.ToString());
+					SoomlaEditorScript.DirtyEditor();
 				}
 			}
 		}
@@ -535,6 +546,7 @@ namespace Soomla.Store
 				if (amazonBP != value.ToString()) {
 					amazonBP = value.ToString();
 					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "AmazonBP", value.ToString());
+					SoomlaEditorScript.DirtyEditor();
 				}
 			}
 		}
@@ -555,6 +567,7 @@ namespace Soomla.Store
 				if (wP8SimulatorBuild != value.ToString()) {
 					wP8SimulatorBuild = value.ToString();
 					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "WP8SimulatorBuild", value.ToString());
+					SoomlaEditorScript.DirtyEditor();
 #if UNITY_EDITOR
                     if (value == true)
                     {
@@ -594,6 +607,7 @@ namespace Soomla.Store
 				if (wP8TestMode != value.ToString()) {
 					wP8TestMode = value.ToString();
 					SoomlaEditorScript.SetConfigValue(StoreModulePrefix, "WP8TestMode", value.ToString());
+					SoomlaEditorScript.DirtyEditor();
                 }
             }
         }

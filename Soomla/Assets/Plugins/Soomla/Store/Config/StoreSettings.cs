@@ -301,7 +301,7 @@ namespace Soomla.Store
 		{
 			get {
 				if (androidPublicKey == null) {
-					string value = SoomlaEditorScript.GetConfigValue (StoreModulePrefix, "AndroidPublicKey");
+					androidPublicKey = SoomlaEditorScript.GetConfigValue (StoreModulePrefix, "AndroidPublicKey");
 					if (androidPublicKey == null) {
 						androidPublicKey = AND_PUB_KEY_DEFAULT;
 					}

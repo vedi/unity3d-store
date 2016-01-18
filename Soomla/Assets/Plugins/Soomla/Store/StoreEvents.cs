@@ -156,7 +156,7 @@ namespace Soomla.Store {
         [Subscribe]
         public static void onGoodEquipped(GoodEquippedEvent _Event)
         {
-            onGoodEquipped(_Event);
+			onGoodEquipped(_Event, false);
         }
         public static void onGoodEquipped(GoodEquippedEvent _Event, bool alsoPush)
         {
@@ -182,7 +182,7 @@ namespace Soomla.Store {
         [Subscribe]
         public static void onGoodUnequipped(GoodUnEquippedEvent _Event)
         {
-            onGoodUnequipped(_Event);
+            onGoodUnequipped(_Event, false);
         }
         public static void onGoodUnequipped(GoodUnEquippedEvent _Event,bool alsoPush)
         {
@@ -851,12 +851,13 @@ namespace Soomla.Store {
 			SoomlaUtils.LogDebug(TAG, "SOOMLA/UNITY OnUnexpectedStoreError");
 
 			JSONObject eventJSON = new JSONObject(message);
-			StoreEvents.OnUnexpectedStoreError((int) eventJSON ["errorCode"].n);
+			int errorCode = (int)eventJSON ["errorCode"].n;
+			StoreEvents.OnUnexpectedStoreError(errorCode);
 			//StoreEvents.OnUnexpectedStoreError(new UnexpectedStoreErrorEvent((int) eventJSON ["errorCode"].n));
 
 			if (alsoPush) {
 #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
-				sep.PushEventSoomlaStoreInitialized();
+				sep.PushEventUnexpectedStoreError(errorCode);
 #endif
 			}
 		}
@@ -997,8 +998,11 @@ namespace Soomla.Store {
 			public void PushEventSoomlaStoreInitialized() {
 				_pushEventSoomlaStoreInitialized("");
 			}
-			public void PushEventUnexpectedStoreError(string message) {
-				_pushEventUnexpectedStoreError(message);
+			public void PushEventUnexpectedStoreError(int errorCode) {
+				var eventJSON = new JSONObject();
+				eventJSON.AddField("errorCode", errorCode);
+
+			_pushEventUnexpectedStoreError(eventJSON.print());
 			}
 			public void PushEventOnCurrencyBalanceChanged(VirtualCurrency currency, int balance, int amountAdded) {
 				var eventJSON = new JSONObject();

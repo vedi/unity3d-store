@@ -15,6 +15,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 using System.Collections;
 
 namespace Soomla.Store {
@@ -88,6 +89,14 @@ namespace Soomla.Store {
 			
 			return obj;
 		}
-
+		public bool Equals(VirtualCategory c)
+		{
+			if (Name == c.Name) {
+				if (GoodItemIds.ToArray ().SequenceEqual (c.GoodItemIds.ToArray ())) {
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 }

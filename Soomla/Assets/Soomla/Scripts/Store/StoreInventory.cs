@@ -181,7 +181,7 @@ namespace Soomla.Store
 
 	            if (good != null && good.Equipping == EquippableVG.EquippingModel.CATEGORY &&
                     VirtualGoodsStorage.IsEquipped(good) &&
-	                StoreInfo.GetCategoryForVirtualGood(goodItemId) == category)
+					StoreInfo.GetCategoryForVirtualGood (goodItemId).Equals(category))
 	                return good;
 	        }
             SoomlaUtils.LogError(TAG, "There is no virtual good equipped in " + category.Name + " category");
